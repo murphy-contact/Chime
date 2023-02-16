@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{0D4D744B-0E35-4386-970B-3E0354038152}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8038BC95-CF23-44DC-9F60-4C62FD2FCB9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0CBF3E9A-5BA4-455E-B9A6-0B03D49D040E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chime.Modules.Customers.Api", "src\Modules\Customers\Chime.Modules.Customers.Api\Chime.Modules.Customers.Api.csproj", "{0EE2C272-9AFB-46E0-B294-5F9C48097277}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customers", "Customers", "{BAD4869D-5005-496F-8177-50E777511FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chime.Bootstrapper", "src\Bootstrapper\Chime.Bootstrapper\Chime.Bootstrapper.csproj", "{F2E7868D-E392-409D-A527-72B01766D6A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChimeModules.Customers.Core", "src\Modules\Customers\ChimeModules.Customers.Core\ChimeModules.Customers.Core.csproj", "{08DEBEB3-FD0F-4876-AB7E-643E730F0E30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EE2C272-9AFB-46E0-B294-5F9C48097277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE2C272-9AFB-46E0-B294-5F9C48097277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE2C272-9AFB-46E0-B294-5F9C48097277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE2C272-9AFB-46E0-B294-5F9C48097277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E7868D-E392-409D-A527-72B01766D6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E7868D-E392-409D-A527-72B01766D6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E7868D-E392-409D-A527-72B01766D6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E7868D-E392-409D-A527-72B01766D6A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08DEBEB3-FD0F-4876-AB7E-643E730F0E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DEBEB3-FD0F-4876-AB7E-643E730F0E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DEBEB3-FD0F-4876-AB7E-643E730F0E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DEBEB3-FD0F-4876-AB7E-643E730F0E30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BAD4869D-5005-496F-8177-50E777511FC0} = {8038BC95-CF23-44DC-9F60-4C62FD2FCB9C}
+		{0EE2C272-9AFB-46E0-B294-5F9C48097277} = {BAD4869D-5005-496F-8177-50E777511FC0}
+		{F2E7868D-E392-409D-A527-72B01766D6A8} = {0D4D744B-0E35-4386-970B-3E0354038152}
+		{08DEBEB3-FD0F-4876-AB7E-643E730F0E30} = {BAD4869D-5005-496F-8177-50E777511FC0}
+	EndGlobalSection
+EndGlobal
