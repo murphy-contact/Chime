@@ -3,7 +3,6 @@ using Chime.Modules.Customers.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-
 [assembly: InternalsVisibleTo("Chime.Bootstrapper")]
 
 
@@ -11,7 +10,6 @@ namespace Chime.Modules.Customers.Api;
 
 internal static class Extensions
 {
-    
     public static IServiceCollection AddCustomersModule(this IServiceCollection services)
     {
         services.AddCore();

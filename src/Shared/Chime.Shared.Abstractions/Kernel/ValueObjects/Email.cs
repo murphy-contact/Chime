@@ -9,33 +9,20 @@ public class Email : IEquatable<Email>
         @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
         @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
         RegexOptions.Compiled);
-        
-    public string Value { get; }
 
     public Email(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            throw new InvalidEmailException(value);
-        }
+        if (string.IsNullOrWhiteSpace(value)) throw new InvalidEmailException(value);
 
-        if (value.Length > 100)
-        {
-            throw new InvalidEmailException(value);
-        }
+        if (value.Length > 100) throw new InvalidEmailException(value);
 
         value = value.ToLowerInvariant();
-        if (!Regex.IsMatch(value))
-        {
-            throw new InvalidEmailException(value);
-        }
+        if (!Regex.IsMatch(value)) throw new InvalidEmailException(value);
 
         Value = value;
     }
 
-    public static implicit operator string(Email email) => email.Value;
-
-    public static implicit operator Email(string email) => new Email(email);
+    public string Value { get; }
 
     public bool Equals(Email other)
     {
@@ -44,14 +31,30 @@ public class Email : IEquatable<Email>
         return Value == other.Value;
     }
 
+    public static implicit operator string(Email email)
+    {
+        return email.Value;
+    }
+
+    public static implicit operator Email(string email)
+    {
+        return new(email);
+    }
+
     public override bool Equals(object obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == GetType() && Equals((Email) obj);
+        return obj.GetType() == GetType() && Equals((Email)obj);
     }
 
-    public override int GetHashCode() => Value is not null ? Value.GetHashCode() : 0;
-        
-    public override string ToString() => Value;
+    public override int GetHashCode()
+    {
+        return Value is not null ? Value.GetHashCode() : 0;
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
 }
