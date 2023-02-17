@@ -1,5 +1,6 @@
 using Chime.Modules.Customers.Core.Domain.Entities;
 using Chime.Modules.Customers.Core.Domain.Repositories;
+using Chime.Modules.Customers.Core.Domain.ValueObjects;
 using Chime.Shared.Abstractions.Commands;
 using Chime.Shared.Abstractions.Kernel.ValueObjects;
 using Chime.Shared.Abstractions.Time;

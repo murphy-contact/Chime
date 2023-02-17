@@ -18,6 +18,9 @@ internal static class Extensions
             .AddCommands()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>();
+        // .AddControllers()
+        // .ConfigureApplicationPartManager();
+
         return services;
     }
 
