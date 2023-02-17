@@ -1,4 +1,4 @@
-using ChimeModules.Customers.Core;
+using Chime.Modules.Customers.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
