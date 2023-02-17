@@ -38,7 +38,7 @@ public class Email : IEquatable<Email>
 
     public static implicit operator Email(string email)
     {
-        return new(email);
+        return new Email(email);
     }
 
     public override bool Equals(object obj)

@@ -25,7 +25,7 @@ public class Amount : IEquatable<Amount>
 
     public static implicit operator Amount(decimal value)
     {
-        return new(value);
+        return new Amount(value);
     }
 
     public static implicit operator decimal(Amount value)

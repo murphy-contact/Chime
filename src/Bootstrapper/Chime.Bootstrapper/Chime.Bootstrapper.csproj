@@ -20,6 +20,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Modules\Customers\Chime.Modules.Customers.Api\Chime.Modules.Customers.Api.csproj"/>
+        <ProjectReference Include="..\..\Shared\Chime.Shared.Infrastructure\Chime.Shared.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>
