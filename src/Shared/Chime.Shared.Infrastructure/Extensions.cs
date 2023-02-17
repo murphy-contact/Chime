@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Chime.Shared.Abstractions.Commands;
 using Chime.Shared.Abstractions.Time;
 using Chime.Shared.Infrastructure.Commands;
 using Chime.Shared.Infrastructure.Time;
@@ -14,7 +13,7 @@ internal static class Extensions
     public static IServiceCollection AddModularInfrastructure(this IServiceCollection services)
     {
         services
-            .AddSingleton<ICommandDispatcher, CommandDispatcher>()
+            .AddCommands()
             .AddSingleton<IClock, UtcClock>();
         return services;
     }

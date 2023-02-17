@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Chime.Shared.Abstractions\Chime.Shared.Abstractions.csproj" />
+        <ProjectReference Include="..\Chime.Shared.Abstractions\Chime.Shared.Abstractions.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Scrutor" Version="4.2.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Scrutor" Version="4.2.1"/>
     </ItemGroup>
 
 </Project>
