@@ -9,6 +9,7 @@ public static class Extensions
     {
         var options = services.GetOptions<PostgresOptions>("postgres");
         services.AddSingleton(options);
+        services.AddHostedService<DbContextAppInitializer>();
         
         return services;
     }   
