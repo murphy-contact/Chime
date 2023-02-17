@@ -30,7 +30,7 @@ public class Currency : IEquatable<Currency>
 
     public static implicit operator Currency(string value)
     {
-        return new(value);
+        return new Currency(value);
     }
 
     public static implicit operator string(Currency value)
