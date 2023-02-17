@@ -21,7 +21,7 @@ public class Currency : IEquatable<Currency>
 
     public string Value { get; }
 
-    public bool Equals(Currency other)
+    public bool Equals(Currency? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -52,7 +52,7 @@ public class Currency : IEquatable<Currency>
         return !(a == b);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

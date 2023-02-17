@@ -4,33 +4,33 @@ namespace Chime.Modules.Customers.Core.Domain.ValueObjects;
 
 internal class Name : IEquatable<Name>
 {
-    public Name(string value)
+    public Name(string? value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length is > 50 or < 3) throw new InvalidNameException(value);
 
         Value = value.Trim().ToLowerInvariant().Replace(" ", ".");
     }
 
-    public string Value { get; }
+    public string? Value { get; }
 
-    public bool Equals(Name other)
+    public bool Equals(Name? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Value == other.Value;
     }
 
-    public static implicit operator Name(string value)
+    public static implicit operator Name?(string? value)
     {
         return value is null ? null : new Name(value);
     }
 
-    public static implicit operator string(Name value)
+    public static implicit operator string?(Name value)
     {
         return value?.Value;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
@@ -42,7 +42,7 @@ internal class Name : IEquatable<Name>
         return Value is not null ? Value.GetHashCode() : 0;
     }
 
-    public override string ToString()
+    public override string? ToString()
     {
         return Value;
     }
