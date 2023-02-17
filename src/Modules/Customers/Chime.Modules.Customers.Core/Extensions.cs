@@ -3,14 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("Chime.Modules.Customers.Api")]
 
-namespace ChimeModules.Customers.Core;
+namespace Chime.Modules.Customers.Core;
 
-public static class Extensions
+internal static class Extensions
 {
-    
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
         return services;
     }
-   
 }
