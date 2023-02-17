@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Shared\Chime.Shared.Abstractions\Chime.Shared.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Shared\Chime.Shared.Infrastructure\Chime.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
