@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Chime.Modules.Customers.Core;
 
-public static class Extensions
+internal static class Extensions
 {
     
     public static IServiceCollection AddCore(this IServiceCollection services)
