@@ -6,11 +6,15 @@ namespace Chime.Modules.Customers.Core.Domain.Entities;
 
 internal class Customer
 {
+#pragma warning disable CS8618
     private Customer()
+#pragma warning restore CS8618
     {
     }
 
+#pragma warning disable CS8618
     public Customer(Guid id, Email email, DateTime createdAt)
+#pragma warning restore CS8618
     {
         Id = id;
         Email = email ?? throw new InvalidCustomerEmailException(Id);
@@ -25,7 +29,7 @@ internal class Customer
     public Address Address { get; private set; }
     public Nationality Nationality { get; private set; }
     public Identity Identity { get; private set; }
-    public string Notes { get; private set; }
+    public string? Notes { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; }
     public DateTime? CompletedAt { get; private set; }
@@ -55,13 +59,13 @@ internal class Customer
         VerifiedAt = verifiedAt;
     }
 
-    public void Lock(string notes = null)
+    public void Lock(string? notes = null)
     {
         IsActive = false;
         Notes = notes?.Trim();
     }
 
-    public void Unlock(string notes = null)
+    public void Unlock(string? notes = null)
     {
         IsActive = true;
         Notes = notes?.Trim();

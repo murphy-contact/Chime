@@ -16,7 +16,7 @@ public class Amount : IEquatable<Amount>
 
     public static Amount Zero => new(0);
 
-    public bool Equals(Amount other)
+    public bool Equals(Amount? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -33,7 +33,7 @@ public class Amount : IEquatable<Amount>
         return value.Value;
     }
 
-    public static bool operator ==(Amount a, Amount b)
+    public static bool operator ==(Amount? a, Amount? b)
     {
         if (ReferenceEquals(a, b)) return true;
 
@@ -77,7 +77,7 @@ public class Amount : IEquatable<Amount>
         return a.Value - b.Value;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

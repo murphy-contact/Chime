@@ -4,10 +4,10 @@ namespace Chime.Modules.Customers.Core.Exceptions;
 
 internal class InvalidNameException : ChimeException
 {
-    public InvalidNameException(string name) : base($"Name: '{name}' is invalid.")
+    public InvalidNameException(string? name) : base($"Name: '{name}' is invalid.")
     {
         Name = name;
     }
 
-    public string Name { get; }
+    public string? Name { get; }
 }

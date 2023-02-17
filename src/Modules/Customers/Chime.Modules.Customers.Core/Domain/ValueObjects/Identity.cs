@@ -25,7 +25,7 @@ internal class Identity : IEquatable<Identity>
     public string Type { get; }
     public string Series { get; }
 
-    public bool Equals(Identity other)
+    public bool Equals(Identity? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -60,7 +60,7 @@ internal class Identity : IEquatable<Identity>
         return (values[0], values[1]);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

@@ -4,10 +4,10 @@ namespace Chime.Shared.Abstractions.Kernel.Exceptions;
 
 public class InvalidFullNameException : ChimeException
 {
-    public InvalidFullNameException(string fullName) : base($"Full name: '{fullName}' is invalid.")
+    public InvalidFullNameException(string? fullName) : base($"Full name: '{fullName}' is invalid.")
     {
         FullName = fullName;
     }
 
-    public string FullName { get; }
+    public string? FullName { get; }
 }
