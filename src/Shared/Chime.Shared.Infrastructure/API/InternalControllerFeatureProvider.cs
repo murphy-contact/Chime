@@ -22,7 +22,7 @@ internal class InternalControllerFeatureProvider : ControllerFeatureProvider
 
         // We only consider public top-level classes as controllers. IsPublic returns false for nested
         // classes, regardless of visibility modifiers
-        if (!typeInfo.IsPublic) return false;
+        // if (!typeInfo.IsPublic) return false;
 
         if (typeInfo.ContainsGenericParameters) return false;
 
