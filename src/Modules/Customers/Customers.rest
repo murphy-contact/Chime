@@ -1,5 +1,5 @@
 @url = http://localhost:5069/customers
-@customerId = 00000000-0000-0000-0000-000000000001
+@customerId = 18665517-3475-40ce-86a4-220649b8e3f5
 
 ###
 GET {{url}}

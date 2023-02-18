@@ -10,7 +10,7 @@ builder.Services
     .AddControllers()
     .ConfigureApplicationPartManager(manager =>
     {
-        manager.FeatureProviders.Add(new InternalControllerFeatureProvider());   
+        manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
     });
 
 builder.Services.AddCustomersModule();

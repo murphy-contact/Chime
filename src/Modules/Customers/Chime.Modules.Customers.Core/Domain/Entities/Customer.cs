@@ -26,7 +26,7 @@ internal class Customer
     public Email Email { get; }
     public Name Name { get; private set; }
     public FullName FullName { get; private set; }
-    public Address Address { get; private set; }
+    public Address? Address { get; private set; }
     public Nationality Nationality { get; private set; }
     public Identity Identity { get; private set; }
     public string? Notes { get; private set; }
@@ -35,7 +35,7 @@ internal class Customer
     public DateTime? CompletedAt { get; private set; }
     public DateTime? VerifiedAt { get; private set; }
 
-    public void Complete(Name name, FullName fullName, Address address, Nationality nationality, Identity identity,
+    public void Complete(Name name, FullName fullName, Address? address, Nationality nationality, Identity identity,
         DateTime completedAt)
     {
         if (!IsActive) throw new CustomerNotActiveException(Id);

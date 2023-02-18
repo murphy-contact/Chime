@@ -25,7 +25,7 @@ internal class Address : IEquatable<Address>
         return value is null ? null : new Address(value);
     }
 
-    public static implicit operator string?(Address value)
+    public static implicit operator string?(Address? value)
     {
         return value?.Value;
     }
