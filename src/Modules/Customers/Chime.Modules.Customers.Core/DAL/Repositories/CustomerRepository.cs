@@ -16,10 +16,14 @@ internal class CustomerRepository : ICustomerRepository
     }
 
     public Task<bool> ExistsAsync(string name)
-        => _customers.AnyAsync(x => x.Name == name);
+    {
+        return _customers.AnyAsync(x => x.Name == name);
+    }
 
     public Task<Customer?> GetAsync(Guid id)
-        => _customers.SingleOrDefaultAsync(x => x.Id == id);
+    {
+        return _customers.SingleOrDefaultAsync(x => x.Id == id);
+    }
     // public  Task<Customer> GetAsync(Guid id)
     //         => _customers.SingleOrDefaultAsync(x => x.Id == id);
 

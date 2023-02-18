@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chime.Modules.Customers.Core.DAL;
 
-internal class CustomersDbContext: DbContext
+internal class CustomersDbContext : DbContext
 {
-    public DbSet<Customer> Customers { get; set; }
-    
     public CustomersDbContext(DbContextOptions<CustomersDbContext> options) : base(options)
     {
-        
     }
+
+    public DbSet<Customer> Customers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,6 +1,5 @@
 using Chime.Modules.Customers.Core.Domain.Entities;
 using Chime.Modules.Customers.Core.Domain.Repositories;
-using Chime.Modules.Customers.Core.Domain.ValueObjects;
 using Chime.Shared.Abstractions.Commands;
 using Chime.Shared.Abstractions.Kernel.ValueObjects;
 using Chime.Shared.Abstractions.Time;
@@ -10,11 +9,12 @@ namespace Chime.Modules.Customers.Core.Commands.Handlers;
 
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
 {
-    private readonly ICustomerRepository _customerRepository;
     private readonly IClock _clock;
+    private readonly ICustomerRepository _customerRepository;
     private readonly ILogger<CreateCustomerHandler> _logger;
 
-    public CreateCustomerHandler(ICustomerRepository customerRepository, IClock clock, ILogger<CreateCustomerHandler> logger)
+    public CreateCustomerHandler(ICustomerRepository customerRepository, IClock clock,
+        ILogger<CreateCustomerHandler> logger)
     {
         _customerRepository = customerRepository;
         _clock = clock;

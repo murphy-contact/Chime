@@ -1,8 +1,12 @@
 using System.Runtime.CompilerServices;
+using Chime.Shared.Abstractions.Dispatchers;
 using Chime.Shared.Abstractions.Time;
 using Chime.Shared.Infrastructure.Commands;
+using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Postgres;
+using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +20,8 @@ internal static class Extensions
     {
         services
             .AddCommands()
+            .AddQueries()
+            .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>();
         // .AddControllers()

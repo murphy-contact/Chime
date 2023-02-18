@@ -1,5 +1,7 @@
 using Chime.Modules.Customers.Core.Commands;
-using Chime.Shared.Abstractions.Commands;
+using Chime.Modules.Customers.Core.Queries;
+using Chime.Modules.Customers.Core.Queries.GetCustomer;
+using Chime.Shared.Abstractions.Dispatchers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chime.Bootstrapper.Controllers;
@@ -8,17 +10,27 @@ namespace Chime.Bootstrapper.Controllers;
 [Route("[controller]")]
 internal class CustomersController : Controller
 {
-    private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IDispatcher _dispatcher;
 
-    public CustomersController(ICommandDispatcher commandDispatcher)
+    public CustomersController(IDispatcher dispatcher)
     {
-        _commandDispatcher = commandDispatcher;
+        _dispatcher = dispatcher;
+    }
+
+    [HttpGet("{customerId:guid}")]
+    public async Task<ActionResult<CustomerDetailsDto>> Get(Guid customerId)
+    {
+        var customer = await _dispatcher.QueryAsync(new GetCustomer { CustomerId = customerId });
+
+        if (customer is not null) return Ok(customer);
+
+        return NotFound();
     }
 
     [HttpPost]
     public async Task<ActionResult> PostAsync(CreateCustomer command)
     {
-        await _commandDispatcher.SendAsync(command);
+        await _dispatcher.SendAsync(command);
         return NoContent();
     }
 }
