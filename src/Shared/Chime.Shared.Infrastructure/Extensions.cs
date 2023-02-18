@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Chime.Shared.Abstractions.Dispatchers;
 using Chime.Shared.Abstractions.Time;
@@ -6,8 +7,6 @@ using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
-using Microsoft.AspNetCore.Mvc.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,11 +16,12 @@ namespace Chime.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddModularInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddModularInfrastructure(this IServiceCollection services,
+        IList<Assembly> assemblies)
     {
         services
-            .AddCommands()
-            .AddQueries()
+            .AddCommands(assemblies)
+            .AddQueries(assemblies)
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>();

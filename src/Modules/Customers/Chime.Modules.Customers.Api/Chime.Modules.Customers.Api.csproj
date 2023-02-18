@@ -6,17 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    
 
     <ItemGroup>
-        <ProjectReference Include="..\Chime.Modules.Customers.Core\Chime.Modules.Customers.Core.csproj" />
+        <ProjectReference Include="..\Chime.Modules.Customers.Core\Chime.Modules.Customers.Core.csproj"/>
     </ItemGroup>
 
-    
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0"/>
     </ItemGroup>
 
 </Project>

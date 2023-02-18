@@ -1,3 +1,4 @@
+using System.Reflection;
 using Chime.Shared.Abstractions.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -5,10 +6,8 @@ namespace Chime.Shared.Infrastructure.Commands;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddCommands(this IServiceCollection services)
+    public static IServiceCollection AddCommands(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
         services
             .AddSingleton<ICommandDispatcher, CommandDispatcher>();
         services.Scan(s =>

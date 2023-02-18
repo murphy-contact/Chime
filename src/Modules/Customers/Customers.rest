@@ -12,7 +12,7 @@ POST {{url}}
 Content-Type: application/json
 
 {
-  "email": "user1@chime.io"
+  "email": "user2@chime.io"
 }
 
 ###
