@@ -6,6 +6,7 @@ using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
+using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

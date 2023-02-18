@@ -6,6 +6,3 @@ internal class GetCustomer : IQuery<CustomerDetailsDto>
 {
     public Guid CustomerId { get; set; }
 }
-
-
-

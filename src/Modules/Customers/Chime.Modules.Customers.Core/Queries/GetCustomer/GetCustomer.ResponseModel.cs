@@ -27,7 +27,7 @@ internal static class GetCustomerResponseModel
 
     private static T Map<T>(this Customer customer) where T : CustomerDto, new()
     {
-        return new()
+        return new T
         {
             CustomerId = customer.Id,
             Email = customer.Email,
