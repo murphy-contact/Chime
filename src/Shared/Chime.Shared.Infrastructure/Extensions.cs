@@ -50,10 +50,7 @@ internal static class Extensions
                     removedParts.AddRange(parts);
                 }
 
-                foreach (var part in removedParts)
-                {
-                    manager.ApplicationParts.Remove(part);
-                }
+                foreach (var part in removedParts) manager.ApplicationParts.Remove(part);
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
 
