@@ -1,10 +1,9 @@
 using Chime.Modules.Customers.Core.Commands;
-using Chime.Modules.Customers.Core.Queries;
 using Chime.Modules.Customers.Core.Queries.GetCustomer;
 using Chime.Shared.Abstractions.Dispatchers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chime.Bootstrapper.Controllers;
+namespace Chime.Modules.Customers.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

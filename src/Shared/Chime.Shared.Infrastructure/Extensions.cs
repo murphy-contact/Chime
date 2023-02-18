@@ -1,12 +1,14 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Chime.Shared.Abstractions.Dispatchers;
 using Chime.Shared.Abstractions.Time;
+using Chime.Shared.Infrastructure.API;
 using Chime.Shared.Infrastructure.Commands;
 using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,16 +18,44 @@ namespace Chime.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddModularInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddModularInfrastructure(this IServiceCollection services,
+        IList<Assembly> assemblies)
     {
+        var disabledModules = new List<string>();
+        using (var serviceProvider = services.BuildServiceProvider())
+        {
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            foreach (var (key, value) in configuration.AsEnumerable())
+            {
+                if (!key.Contains(":module:enabled")) continue;
+
+                if (!bool.Parse(value)) disabledModules.Add(key.Split(":")[0]);
+            }
+        }
+
         services
-            .AddCommands()
-            .AddQueries()
+            .AddCommands(assemblies)
+            .AddQueries(assemblies)
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
-            .AddSingleton<IClock, UtcClock>();
-        // .AddControllers()
-        // .ConfigureApplicationPartManager();
+            .AddSingleton<IClock, UtcClock>()
+            .AddControllers()
+            .ConfigureApplicationPartManager(manager =>
+            {
+                var removedParts = new List<ApplicationPart>();
+                foreach (var disabledModule in disabledModules)
+                {
+                    var parts = manager.ApplicationParts.Where(x => x.Name.Contains(disabledModule,
+                        StringComparison.InvariantCultureIgnoreCase));
+                    removedParts.AddRange(parts);
+                }
+
+                foreach (var part in removedParts)
+                {
+                    manager.ApplicationParts.Remove(part);
+                }
+                manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+            });
 
         return services;
     }

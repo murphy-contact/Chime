@@ -1,23 +1,23 @@
 using System.Runtime.CompilerServices;
 using Chime.Modules.Customers.Core;
+using Chime.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("Chime.Bootstrapper")]
 
-
 namespace Chime.Modules.Customers.Api;
 
-internal static class Extensions
+internal class CustomersModule : IModule
 {
-    public static IServiceCollection AddCustomersModule(this IServiceCollection services)
+    public string Name { get; } = "Customers";
+
+    public void Register(IServiceCollection services)
     {
         services.AddCore();
-        return services;
     }
 
-    public static IApplicationBuilder UseCustomersModule(this IApplicationBuilder builder)
+    public void Use(IApplicationBuilder app)
     {
-        return builder;
     }
 }

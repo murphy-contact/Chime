@@ -16,7 +16,7 @@ internal class IdentityDto
 internal class CustomerDto
 {
     public Guid CustomerId { get; set; }
-    
+
     public string State { get; set; }
     public string Email { get; set; }
     public string Name { get; set; }

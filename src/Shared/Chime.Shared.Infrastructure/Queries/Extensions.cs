@@ -1,3 +1,4 @@
+using System.Reflection;
 using Chime.Shared.Abstractions.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -5,10 +6,8 @@ namespace Chime.Shared.Infrastructure.Queries;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddQueries(this IServiceCollection services)
+    public static IServiceCollection AddQueries(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
         services
             .AddSingleton<IQueryDispatcher, QueryDispatcher>();
         services.Scan(s =>

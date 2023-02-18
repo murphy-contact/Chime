@@ -1,24 +1,19 @@
-using Chime.Modules.Customers.Api;
 using Chime.Shared.Infrastructure;
-using Chime.Shared.Infrastructure.API;
+using Chime.Shared.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.ConfigureModules();
 
-// Add services to the container.
+var assemblies = ModulesLoader.LoadAssemblies(builder.Configuration);
+var modules = ModulesLoader.LoadModules(assemblies);
+foreach (var module in modules) module.Register(builder.Services);
 
-builder.Services
-    .AddControllers()
-    .ConfigureApplicationPartManager(manager =>
-    {
-        manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-    });
-
-builder.Services.AddCustomersModule();
-builder.Services.AddModularInfrastructure();
+builder.Services.AddModularInfrastructure(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -33,7 +28,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCustomersModule();
+foreach (var module in modules) module.Use(app);
 
 app.MapControllers();
 

@@ -36,3 +36,22 @@ volumes:
     driver: local
   # redis:
   #   driver: local
+
+
+#networks:
+#  chime-dev:
+#    driver: bridge
+#
+#services:
+#
+#  chime-api:
+#    image: chime:v0.12
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+#    ports:
+#      - "5069:5069"
+#    networks:
+#      - chime-dev
