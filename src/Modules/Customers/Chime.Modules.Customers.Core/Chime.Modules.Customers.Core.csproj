@@ -7,15 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-            <HintPath>..\..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\7.0.3\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-        </Reference>
-        <Reference Include="Microsoft.Extensions.Logging.Abstractions">
-            <HintPath>..\..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\7.0.3\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\..\..\Shared\Chime.Shared.Abstractions\Chime.Shared.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\Shared\Chime.Shared.Infrastructure\Chime.Shared.Infrastructure.csproj" />
     </ItemGroup>
@@ -23,6 +14,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
     </ItemGroup>
