@@ -17,4 +17,12 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0"/>
     </ItemGroup>
 
+
+    <ItemGroup>
+        <None Remove="modules.customers.json"/>
+        <Content Include="modules.customers.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
 </Project>
