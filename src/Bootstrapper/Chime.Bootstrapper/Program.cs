@@ -1,3 +1,4 @@
+using Chime.Modules.Users.Api;
 using Chime.Shared.Infrastructure;
 using Chime.Shared.Infrastructure.Modules;
 
@@ -7,6 +8,8 @@ builder.Host.ConfigureModules();
 var assemblies = ModulesLoader.LoadAssemblies(builder.Configuration);
 var modules = ModulesLoader.LoadModules(assemblies);
 foreach (var module in modules) module.Register(builder.Services);
+
+builder.Services.AddUsersModule();
 
 builder.Services.AddModularInfrastructure(assemblies);
 
@@ -29,6 +32,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 foreach (var module in modules) module.Use(app);
+
+app.UseUsersModule();
 
 app.MapControllers();
 

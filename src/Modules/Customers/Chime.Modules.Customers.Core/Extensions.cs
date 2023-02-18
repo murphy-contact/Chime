@@ -17,4 +17,4 @@ internal static class Extensions
         services.AddPostgres<CustomersDbContext>();
         return services;
     }
-}
+}   
