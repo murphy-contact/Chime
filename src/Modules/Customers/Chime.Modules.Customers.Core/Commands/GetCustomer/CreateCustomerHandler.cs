@@ -1,5 +1,7 @@
+using Chime.Modules.Customers.Core.Clients;
 using Chime.Modules.Customers.Core.Domain.Entities;
 using Chime.Modules.Customers.Core.Domain.Repositories;
+using Chime.Modules.Customers.Core.Exceptions;
 using Chime.Shared.Abstractions.Commands;
 using Chime.Shared.Abstractions.Kernel.ValueObjects;
 using Chime.Shared.Abstractions.Time;
@@ -9,23 +11,41 @@ namespace Chime.Modules.Customers.Core.Commands.GetCustomer;
 
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
 {
-    private readonly IClock _clock;
     private readonly ICustomerRepository _customerRepository;
+    private readonly IClock _clock;
+    private readonly IUserApiClient _userApiClient;
     private readonly ILogger<CreateCustomerHandler> _logger;
 
     public CreateCustomerHandler(ICustomerRepository customerRepository, IClock clock,
-        ILogger<CreateCustomerHandler> logger)
+        IUserApiClient userApiClient, ILogger<CreateCustomerHandler> logger)
     {
         _customerRepository = customerRepository;
         _clock = clock;
+        _userApiClient = userApiClient;
         _logger = logger;
     }
 
     public async Task HandleAsync(CreateCustomer command, CancellationToken cancellationToken = default)
     {
         _ = new Email(command.Email);
+        var user = await _userApiClient.GetAsync(command.Email);
+        if (user is null)
+        {
+            throw new UserNotFoundException(command.Email);
+        }
 
-        var customer = new Customer(Guid.NewGuid(), command.Email, _clock.CurrentDate());
+        if (user.Role is not "user")
+        {
+            return;
+        }
+
+        var customerId = user.UserId;
+        if (await _customerRepository.GetAsync(customerId) is not null)
+        {
+            throw new CustomerAlreadyExistsException(customerId);
+        }
+
+        var customer = new Customer(customerId, user.Email, _clock.CurrentDate());
         await _customerRepository.AddAsync(customer);
         _logger.LogInformation($"Created a customer with ID: '{customer.Id}'.");
     }
