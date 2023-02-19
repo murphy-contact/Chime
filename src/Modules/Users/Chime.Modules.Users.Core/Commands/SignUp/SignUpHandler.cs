@@ -14,11 +14,15 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     private readonly IRoleRepository _roleRepository;
     private readonly IUserRepository _userRepository;
 
-    public SignUpHandler(IUserRepository userRepository, IRoleRepository roleRepository,
-        IPasswordHasher<User> passwordHasher, IClock clock,
-        //IMessageBroker messageBroker,
-        // RegistrationOptions registrationOptions, 
-        ILogger<SignUpHandler> logger)
+    public SignUpHandler(
+        IUserRepository userRepository,
+        IRoleRepository roleRepository,
+        IPasswordHasher<User> passwordHasher,
+        IClock clock,
+        // IMessageBroker messageBroker,
+        //  RegistrationOptions registrationOptions, 
+        ILogger<SignUpHandler> logger
+    )
     {
         _userRepository = userRepository;
         _roleRepository = roleRepository;

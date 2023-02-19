@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Chime.Modules.Users.Core;
+using Chime.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,16 +8,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Chime.Modules.Users.Api;
 
-internal static class Extensions
+internal class UsersModule : IModule
 {
-    public static IServiceCollection AddUsersModule(this IServiceCollection services)
+    public string Name { get; } = "Users";
+
+    public void Register(IServiceCollection services)
     {
         services.AddCore();
-        return services;
     }
 
-    public static IApplicationBuilder UseUsersModule(this IApplicationBuilder builder)
+    public void Use(IApplicationBuilder app)
     {
-        return builder;
     }
 }

@@ -1,0 +1,16 @@
+@url = http://localhost:5069/customers
+@customerId = 18665517-3475-40ce-86a4-220649b8e3f5
+
+###
+GET {{url}}
+
+###
+GET {{url}}/{{customerId}}
+
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+  "email": "user2@chime.io"
+}

@@ -1,6 +1,7 @@
-using Chime.Modules.Users.Api;
 using Chime.Shared.Infrastructure;
+using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Modules;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
@@ -10,7 +11,6 @@ builder.Services.AddModularInfrastructure(assemblies);
 
 var modules = ModulesLoader.LoadModules(assemblies);
 foreach (var module in modules) module.Register(builder.Services);
-builder.Services.AddUsersModule();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -20,7 +20,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 foreach (var module in modules) module.Use(app);
-app.UseUsersModule();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
+app.UseCorrelationId();
+app.UseContext();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -7,15 +7,15 @@ namespace Chime.Shared.Infrastructure.Postgres;
 
 public class DbContextAppInitializer : IHostedService
 {
-    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<DbContextAppInitializer> _logger;
+    private readonly IServiceProvider _serviceProvider;
 
     public DbContextAppInitializer(IServiceProvider serviceProvider, ILogger<DbContextAppInitializer> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
-        
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -26,18 +26,14 @@ public class DbContextAppInitializer : IHostedService
         foreach (var dbContextType in dbContextTypes)
         {
             var dbContext = scope.ServiceProvider.GetService(dbContextType) as DbContext;
-            if (dbContext is null)
-            {
-                continue;
-            }
-                
+            if (dbContext is null) continue;
+
             _logger.LogInformation("Running DB context for module {Module}...", dbContextType.GetModuleName());
             await dbContext.Database.MigrateAsync(cancellationToken);
         }
-            
+
         var initializers = scope.ServiceProvider.GetServices<IInitializer>();
         foreach (var initializer in initializers)
-        {
             try
             {
                 _logger.LogInformation($"Running the initializer: {initializer.GetType().Name}...");
@@ -47,8 +43,10 @@ public class DbContextAppInitializer : IHostedService
             {
                 _logger.LogError(exception, exception.Message);
             }
-        }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
 }
