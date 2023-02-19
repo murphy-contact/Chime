@@ -14,16 +14,20 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     private readonly IRoleRepository _roleRepository;
     private readonly IUserRepository _userRepository;
 
-    public SignUpHandler(IUserRepository userRepository, IRoleRepository roleRepository,
-        IPasswordHasher<User> passwordHasher, IClock clock,
+    public SignUpHandler(
+        // IUserRepository userRepository, 
+        // IRoleRepository roleRepository,
+        // IPasswordHasher<User> passwordHasher, 
+        // IClock clock,
         //IMessageBroker messageBroker,
         // RegistrationOptions registrationOptions, 
-        ILogger<SignUpHandler> logger)
+        // ILogger<SignUpHandler> logger
+        )
     {
-        _userRepository = userRepository;
-        _roleRepository = roleRepository;
-        _clock = clock;
-        _logger = logger;
+        // _userRepository = userRepository;
+        // _roleRepository = roleRepository;
+        // _clock = clock;
+        // _logger = logger;
     }
 
     public Task HandleAsync(SignUp command, CancellationToken cancellationToken = default)

@@ -9,7 +9,8 @@ internal static class Extensions
     {
         return builder.ConfigureAppConfiguration((ctx, cfg) =>
         {
-            foreach (var settings in GetSettings("*"))
+            var enumerable = GetSettings("*");
+            foreach (var settings in enumerable)
                 cfg.AddJsonFile(settings);
 
             IEnumerable<string> GetSettings(string pattern)
