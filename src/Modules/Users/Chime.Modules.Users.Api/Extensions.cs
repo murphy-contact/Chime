@@ -3,7 +3,8 @@ using Chime.Modules.Users.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly:InternalsVisibleTo("Chime.Bootstrapper")]
+[assembly: InternalsVisibleTo("Chime.Bootstrapper")]
+
 namespace Chime.Modules.Users.Api;
 
 internal static class Extensions

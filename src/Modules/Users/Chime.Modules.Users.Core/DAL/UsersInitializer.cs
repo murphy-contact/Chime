@@ -5,8 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Chime.Modules.Users.Core.DAL;
 
-internal class UsersInitializer: IInitializer
+internal class UsersInitializer : IInitializer
 {
+    private readonly UsersDbContext _dbContext;
+    private readonly ILogger<UsersInitializer> _logger;
+
     private readonly HashSet<string> _permissions = new()
     {
         "customers",
@@ -14,9 +17,6 @@ internal class UsersInitializer: IInitializer
         "users",
         "transfers", "wallets"
     };
-
-    private readonly UsersDbContext _dbContext;
-    private readonly ILogger<UsersInitializer> _logger;
 
     public UsersInitializer(UsersDbContext dbContext, ILogger<UsersInitializer> logger)
     {
@@ -26,10 +26,7 @@ internal class UsersInitializer: IInitializer
 
     public async Task InitAsync()
     {
-        if (await _dbContext.Roles.AnyAsync())
-        {
-            return;
-        }
+        if (await _dbContext.Roles.AnyAsync()) return;
 
         await AddRolesAsync();
         await _dbContext.SaveChangesAsync();
@@ -49,5 +46,5 @@ internal class UsersInitializer: IInitializer
         });
 
         _logger.LogInformation("Initialized roles.");
-    }    
+    }
 }

@@ -20,6 +20,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+foreach (var module in modules) module.Use(app);
+app.UseUsersModule();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -30,10 +33,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-foreach (var module in modules) module.Use(app);
-
-app.UseUsersModule();
 
 app.MapControllers();
 

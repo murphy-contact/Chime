@@ -7,6 +7,4 @@ internal class UsersUnitOfWork : PostgresUnitOfWork<UsersDbContext>
     public UsersUnitOfWork(UsersDbContext dbContext) : base(dbContext)
     {
     }
-
-    
 }

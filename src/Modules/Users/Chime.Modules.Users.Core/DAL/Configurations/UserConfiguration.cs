@@ -9,8 +9,10 @@ internal class UserConfiguration
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasIndex(x => x.Email).IsUnique();
-        builder.Property(x => x.Email).IsRequired().HasMaxLength(100)
-            .HasConversion(x => x.Value, x => new Email(x));
+        builder.Property(x => x.Email).IsRequired()
+            .HasMaxLength(100);
+            // .HasConversion(x => x.Value, x => new Email(x));
+            
         builder.Property(x => x.Password).IsRequired().HasMaxLength(500);
-    } 
+    }
 }

@@ -18,6 +18,11 @@ namespace Chime.Shared.Infrastructure;
 
 internal static class Extensions
 {
+    public static IServiceCollection AddInitializer<T>(this IServiceCollection services) where T : class, IInitializer
+    {
+        return services.AddTransient<IInitializer, T>();
+    }
+
     public static IServiceCollection AddModularInfrastructure(this IServiceCollection services,
         IList<Assembly> assemblies)
     {
@@ -69,5 +74,19 @@ internal static class Extensions
         var options = new T();
         configuration.GetSection(sectionName).Bind(options);
         return options;
+    }
+
+    public static string GetModuleName(this object value)
+    {
+        return value?.GetType().GetModuleName() ?? string.Empty;
+    }
+
+    public static string GetModuleName(this Type type, string namespacePart = "Modules", int splitIndex = 2)
+    {
+        if (type?.Namespace is null) return string.Empty;
+
+        return type.Namespace.Contains(namespacePart)
+            ? type.Namespace.Split(".")[splitIndex].ToLowerInvariant()
+            : string.Empty;
     }
 }
