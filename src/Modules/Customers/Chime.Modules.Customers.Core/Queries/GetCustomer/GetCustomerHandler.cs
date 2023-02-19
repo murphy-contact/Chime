@@ -20,6 +20,6 @@ internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDe
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == query.CustomerId, cancellationToken);
 
-        return customer?.AsResponseModel();
+        return customer?.AsResponseModel()!;
     }
 }

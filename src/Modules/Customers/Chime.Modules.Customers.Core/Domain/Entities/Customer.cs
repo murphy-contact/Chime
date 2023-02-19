@@ -12,9 +12,7 @@ internal class Customer
     {
     }
 
-#pragma warning disable CS8618
     public Customer(Guid id, Email email, DateTime createdAt)
-#pragma warning restore CS8618
     {
         Id = id;
         Email = email ?? throw new InvalidCustomerEmailException(Id);

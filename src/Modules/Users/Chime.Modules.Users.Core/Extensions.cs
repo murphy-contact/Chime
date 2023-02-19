@@ -11,5 +11,4 @@ internal static class Extensions
     {
         return services;
     }
-
 }

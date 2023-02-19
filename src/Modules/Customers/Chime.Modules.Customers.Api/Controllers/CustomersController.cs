@@ -1,4 +1,5 @@
 using Chime.Modules.Customers.Core.Commands;
+using Chime.Modules.Customers.Core.Commands.GetCustomer;
 using Chime.Modules.Customers.Core.Queries.GetCustomer;
 using Chime.Shared.Abstractions.Dispatchers;
 using Microsoft.AspNetCore.Mvc;

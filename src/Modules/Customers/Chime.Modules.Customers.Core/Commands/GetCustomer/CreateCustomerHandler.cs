@@ -5,7 +5,7 @@ using Chime.Shared.Abstractions.Kernel.ValueObjects;
 using Chime.Shared.Abstractions.Time;
 using Microsoft.Extensions.Logging;
 
-namespace Chime.Modules.Customers.Core.Commands.Handlers;
+namespace Chime.Modules.Customers.Core.Commands.GetCustomer;
 
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
 {
