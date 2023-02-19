@@ -10,13 +10,19 @@ namespace Chime.Modules.Users.Api.Controllers;
 internal class AccountController : BaseController
 {
     private const string AccessTokenCookie = "__access-token";
-    private readonly IContext _context;
     private readonly IDispatcher _dispatcher;
+    private readonly IContext _context;
+    // private readonly IUserRequestStorage _userRequestStorage;
+    private readonly CookieOptions _cookieOptions;
 
-    public AccountController(IDispatcher dispatcher, IContext context)
+    public AccountController(IDispatcher dispatcher, IContext context, 
+        // IUserRequestStorage userRequestStorage,
+        CookieOptions cookieOptions)
     {
         _dispatcher = dispatcher;
         _context = context;
+        // _userRequestStorage = userRequestStorage;
+        _cookieOptions = cookieOptions;
     }
 
     [HttpPost("sign-up")]

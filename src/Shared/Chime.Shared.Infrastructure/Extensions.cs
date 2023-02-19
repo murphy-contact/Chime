@@ -45,6 +45,7 @@ internal static class Extensions
 
         services
             .AddContext()
+            .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddCommands(assemblies)
             .AddQueries(assemblies)
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
