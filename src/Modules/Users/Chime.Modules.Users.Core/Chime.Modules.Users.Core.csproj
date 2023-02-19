@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\Chime.Shared.Infrastructure\Chime.Shared.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\..\Shared\Chime.Shared.Infrastructure\Chime.Shared.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -16,6 +16,10 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="DAL\Migrations"/>
     </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ internal static class GetCustomerResponseModel
     public static CustomerDetailsDto? AsResponseModel(this Customer customer)
     {
         var dto = customer.Map<CustomerDetailsDto>();
-        dto.Address = customer.Address;
+        dto.Address = customer.Address!;
         dto.Identity = customer.Identity is null
             ? null
             : new IdentityDto
@@ -20,7 +20,7 @@ internal static class GetCustomerResponseModel
                 Type = customer.Identity.Type,
                 Series = customer.Identity.Series
             };
-        dto.Notes = customer.Notes;
+        dto.Notes = customer.Notes!;
 
         return dto;
     }
@@ -31,9 +31,9 @@ internal static class GetCustomerResponseModel
         {
             CustomerId = customer.Id,
             Email = customer.Email,
-            Name = customer.Name,
-            FullName = customer.FullName,
-            Nationality = customer.Nationality,
+            Name = customer.Name!,
+            FullName = customer.FullName!,
+            Nationality = customer.Nationality!,
             IsActive = customer.IsActive,
             CreatedAt = customer.CreatedAt
         };

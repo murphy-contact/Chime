@@ -25,7 +25,7 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .HasConversion(x => x.Value, x => new FullName(x));
 
         builder.Property(x => x.Address).HasMaxLength(200).IsRequired(false)
-            .HasConversion(x => x.Value, x => new Address(x));
+            .HasConversion(x => x!.Value, x => new Address(x));
 
         builder.Property(x => x.Identity).HasMaxLength(40).IsRequired(false)
             .HasConversion(x => x.ToString(), x => Identity.From(x));

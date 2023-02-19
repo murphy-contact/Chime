@@ -6,12 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
 
 var assemblies = ModulesLoader.LoadAssemblies(builder.Configuration);
+builder.Services.AddModularInfrastructure(assemblies);
+
 var modules = ModulesLoader.LoadModules(assemblies);
 foreach (var module in modules) module.Register(builder.Services);
-
 builder.Services.AddUsersModule();
-
-builder.Services.AddModularInfrastructure(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -19,6 +18,9 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+
+foreach (var module in modules) module.Use(app);
+app.UseUsersModule();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,10 +32,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-foreach (var module in modules) module.Use(app);
-
-app.UseUsersModule();
 
 app.MapControllers();
 
