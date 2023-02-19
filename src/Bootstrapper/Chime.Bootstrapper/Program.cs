@@ -1,5 +1,6 @@
 using Chime.Modules.Users.Api;
 using Chime.Shared.Infrastructure;
+using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ var app = builder.Build();
 
 foreach (var module in modules) module.Use(app);
 app.UseUsersModule();
+
+app.UseContext();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

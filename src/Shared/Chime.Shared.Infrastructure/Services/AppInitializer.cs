@@ -6,21 +6,20 @@ namespace Chime.Shared.Infrastructure.Postgres;
 
 public class AppInitializer : IHostedService
 {
-    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<AppInitializer> _logger;
+    private readonly IServiceProvider _serviceProvider;
 
     public AppInitializer(IServiceProvider serviceProvider, ILogger<AppInitializer> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
-        
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using var scope = _serviceProvider.CreateScope();
         var initializers = scope.ServiceProvider.GetServices<IInitializer>();
         foreach (var initializer in initializers)
-        {
             try
             {
                 _logger.LogInformation($"Running the initializer: {initializer.GetType().Name}...");
@@ -30,8 +29,10 @@ public class AppInitializer : IHostedService
             {
                 _logger.LogError(exception, exception.Message);
             }
-        }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
 }

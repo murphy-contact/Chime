@@ -4,10 +4,13 @@ using Chime.Shared.Abstractions.Dispatchers;
 using Chime.Shared.Abstractions.Time;
 using Chime.Shared.Infrastructure.API;
 using Chime.Shared.Infrastructure.Commands;
+using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +21,8 @@ namespace Chime.Shared.Infrastructure;
 
 internal static class Extensions
 {
+    private const string CorrelationIdKey = "correlation-id";
+
     public static IServiceCollection AddInitializer<T>(this IServiceCollection services) where T : class, IInitializer
     {
         return services.AddTransient<IInitializer, T>();
@@ -39,6 +44,7 @@ internal static class Extensions
         }
 
         services
+            .AddContext()
             .AddCommands(assemblies)
             .AddQueries(assemblies)
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
@@ -89,5 +95,19 @@ internal static class Extensions
         return type.Namespace.Contains(namespacePart)
             ? type.Namespace.Split(".")[splitIndex].ToLowerInvariant()
             : string.Empty;
+    }
+
+    public static IApplicationBuilder UseCorrelationId(this IApplicationBuilder app)
+    {
+        return app.Use((ctx, next) =>
+        {
+            ctx.Items.Add(CorrelationIdKey, Guid.NewGuid());
+            return next();
+        });
+    }
+
+    public static Guid? TryGetCorrelationId(this HttpContext context)
+    {
+        return context.Items.TryGetValue(CorrelationIdKey, out var id) ? (Guid)id : null;
     }
 }
