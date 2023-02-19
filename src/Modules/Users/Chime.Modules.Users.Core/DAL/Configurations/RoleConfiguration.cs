@@ -1,10 +1,11 @@
 using Chime.Modules.Users.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chime.Modules.Users.Core.DAL.Configurations;
 
-internal class RoleConfiguration
+internal class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
@@ -17,7 +18,7 @@ internal class RoleConfiguration
         builder
             .Property(x => x.Permissions).Metadata.SetValueComparer(
                 new ValueComparer<IEnumerable<string>>(
-                    (c1, c2) => c1!.SequenceEqual(c2!),
+                    (c1, c2) => c1.SequenceEqual(c2),
                     c => c.Aggregate(0, (a, next) => HashCode.Combine(a, next.GetHashCode()))));
     }
 }

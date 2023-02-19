@@ -2,7 +2,6 @@ using Chime.Shared.Abstractions.Exceptions;
 
 namespace Chime.Modules.Users.Core.Exceptions;
 
-
 internal class InvalidUserEmailException : ChimeException
 {
     public InvalidUserEmailException(Guid userId)

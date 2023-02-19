@@ -6,12 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
 
 var assemblies = ModulesLoader.LoadAssemblies(builder.Configuration);
+builder.Services.AddModularInfrastructure(assemblies);
+
 var modules = ModulesLoader.LoadModules(assemblies);
 foreach (var module in modules) module.Register(builder.Services);
-
 builder.Services.AddUsersModule();
-
-builder.Services.AddModularInfrastructure(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

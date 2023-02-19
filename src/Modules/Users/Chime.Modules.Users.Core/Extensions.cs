@@ -18,11 +18,16 @@ internal static class Extensions
     {
         // TODO
         return services
-            .AddScoped<IUserRepository,UserRepository>()
-            .AddScoped<IRoleRepository,RoleRepository>()
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IRoleRepository, RoleRepository>()
             .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
             .AddPostgres<UsersDbContext>()
-            ;
-            // .AddTransient<IInitializer, UsersInitializer>();
+            .AddUnitOfWork<UsersUnitOfWork>()
+            .AddInitializer<UsersInitializer>();
+    }
+
+    private static IServiceCollection AddInitializer<T>(this IServiceCollection services) where T : class, IInitializer
+    {
+        return services.AddTransient<IInitializer, T>();
     }
 }

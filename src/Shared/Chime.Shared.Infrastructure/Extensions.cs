@@ -44,6 +44,7 @@ internal static class Extensions
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>()
+            .AddHostedService<DbContextAppInitializer>()
             .AddControllers()
             .ConfigureApplicationPartManager(manager =>
             {
