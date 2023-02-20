@@ -11,10 +11,10 @@ namespace Chime.Modules.Customers.Core.Commands.CreateCustomer;
 
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
 {
-    private readonly ICustomerRepository _customerRepository;
     private readonly IClock _clock;
-    private readonly IUserApiClient _userApiClient;
+    private readonly ICustomerRepository _customerRepository;
     private readonly ILogger<CreateCustomerHandler> _logger;
+    private readonly IUserApiClient _userApiClient;
 
     public CreateCustomerHandler(ICustomerRepository customerRepository, IClock clock,
         IUserApiClient userApiClient,

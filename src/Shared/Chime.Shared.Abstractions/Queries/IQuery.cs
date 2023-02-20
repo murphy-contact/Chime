@@ -1,5 +1,6 @@
 namespace Chime.Shared.Abstractions.Queries;
 
+// Marker
 public interface IQuery
 {
 }
