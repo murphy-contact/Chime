@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Chime.Modules.Customers.Core.Clients.UserApiClient;
 using Chime.Modules.Customers.Core.DAL;
 using Chime.Modules.Customers.Core.DAL.Repositories;
 using Chime.Modules.Customers.Core.Domain.Repositories;
@@ -13,6 +14,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
+        services.AddSingleton<IUserApiClient, UserApiClient>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddPostgres<CustomersDbContext>();
         return services;
