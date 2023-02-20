@@ -1,6 +1,9 @@
 using System.Runtime.CompilerServices;
 using Chime.Modules.Users.Core;
+using Chime.Modules.Users.Core.Queries.GetUserByEmail;
 using Chime.Shared.Abstractions.Modules;
+using Chime.Shared.Abstractions.Queries;
+using Chime.Shared.Infrastructure.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,5 +22,9 @@ internal class UsersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseModuleRequests()
+            .Subscribe<GetUserByEmail, GetUserByEmailResponseModel>("users/get-by-email",
+                (query, serviceProvider, cancellationToken) =>
+                    serviceProvider.GetRequiredService<IQueryDispatcher>().QueryAsync(query, cancellationToken));
     }
 }

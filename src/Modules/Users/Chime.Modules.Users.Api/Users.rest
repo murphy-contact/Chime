@@ -4,8 +4,8 @@
 GET {{url}}
 
 ###
-@email = user1@inflow.io
-@adminEmail = admin1@inflow.io
+@email = user1@chime.io
+@adminEmail = admin1@chime.io
 @password = Secret123!
 
 ### Register as the regular user
@@ -14,5 +14,6 @@ Content-Type: application/json
 
 {
   "email": "{{email}}",
-  "password": "{{password}}"
+  "password": "{{password}}",
+  "role": ""
 }

@@ -6,6 +6,7 @@ using Chime.Shared.Infrastructure.API;
 using Chime.Shared.Infrastructure.Commands;
 using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Dispatchers;
+using Chime.Shared.Infrastructure.Modules;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
 using Chime.Shared.Infrastructure.Time;
@@ -51,6 +52,8 @@ internal static class Extensions
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>()
+            .AddMemoryCache()
+            .AddModuleRequests(assemblies)
             .AddHostedService<DbContextAppInitializer>()
             .AddControllers()
             .ConfigureApplicationPartManager(manager =>
