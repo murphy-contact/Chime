@@ -5,7 +5,7 @@ using Chime.Shared.Abstractions.Kernel.ValueObjects;
 using Chime.Shared.Abstractions.Time;
 using Microsoft.Extensions.Logging;
 
-namespace Chime.Modules.Customers.Core.Commands.GetCustomer;
+namespace Chime.Modules.Customers.Core.Commands.CreateCustomer;
 
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
 {
@@ -21,7 +21,7 @@ internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomer>
         _logger = logger;
     }
 
-    public async Task HandleAsync(CreateCustomer command, CancellationToken cancellationToken = default)
+    public async Task HandleAsync(Commands.CreateCustomer.CreateCustomer command, CancellationToken cancellationToken = default)
     {
         _ = new Email(command.Email);
 
