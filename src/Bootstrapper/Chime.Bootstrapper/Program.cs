@@ -1,7 +1,6 @@
 using Chime.Shared.Infrastructure;
 using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Modules;
-using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
@@ -21,11 +20,6 @@ var app = builder.Build();
 
 foreach (var module in modules) module.Use(app);
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.All
-});
-app.UseCorrelationId();
 app.UseContext();
 
 // Configure the HTTP request pipeline.
