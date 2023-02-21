@@ -34,6 +34,27 @@ internal sealed class ModuleClient : IModuleClient // 55
         return result is null ? null : TranslateType<TResult>(result);
     }
 
+    public async Task PublishAsync(object message, CancellationToken cancellationToken = default)
+    {
+        var module = message.GetModuleName();
+        var key = message.GetType().Name;
+        var registrations = _moduleRegistry
+            .GetBroadcastRegistrations(key)
+            .Where(r => r.ReceiverType != message.GetType());
+
+        var tasks = new List<Task>();
+
+        foreach (var registration in registrations)
+        {
+            var action = registration.Action;
+            var receiverMessage = TranslateType(message, registration.ReceiverType);
+
+            tasks.Add(action(receiverMessage, cancellationToken));
+        }
+
+        await Task.WhenAll(tasks);
+    }
+
     private T TranslateType<T>(object value)
     {
         return _moduleSerializer.Deserialize<T>(_moduleSerializer.Serialize(value));

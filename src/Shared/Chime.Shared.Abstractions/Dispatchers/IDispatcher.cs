@@ -8,7 +8,7 @@ public interface IDispatcher
 {
     Task SendAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
         where TCommand : class, ICommand;
-    
+
     Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEvent;
 
 
