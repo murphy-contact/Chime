@@ -6,6 +6,8 @@ using Chime.Shared.Infrastructure.API;
 using Chime.Shared.Infrastructure.Commands;
 using Chime.Shared.Infrastructure.Contexts;
 using Chime.Shared.Infrastructure.Dispatchers;
+using Chime.Shared.Infrastructure.Events;
+using Chime.Shared.Infrastructure.Messaging;
 using Chime.Shared.Infrastructure.Modules;
 using Chime.Shared.Infrastructure.Postgres;
 using Chime.Shared.Infrastructure.Queries;
@@ -48,11 +50,12 @@ internal static class Extensions
             .AddContext()
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddCommands(assemblies)
+            .AddEvents(assemblies)
             .AddQueries(assemblies)
+            .AddMessaging()
             .AddSingleton<IDispatcher, InMemoryDispatcher>()
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>()
-            .AddMemoryCache()
             .AddModuleRequests(assemblies)
             .AddHostedService<DbContextAppInitializer>()
             .AddControllers()

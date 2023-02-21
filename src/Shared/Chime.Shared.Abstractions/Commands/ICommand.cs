@@ -1,5 +1,8 @@
+using Chime.Shared.Abstractions.Messaging;
+
 namespace Chime.Shared.Abstractions.Commands;
 
-public interface ICommand
+// Marker
+public interface ICommand : IMessage
 {
 }

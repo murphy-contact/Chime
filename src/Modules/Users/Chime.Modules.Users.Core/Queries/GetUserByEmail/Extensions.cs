@@ -20,7 +20,7 @@ internal static class Extensions
 
     private static T Map<T>(this User user) where T : GetUserByEmailResponseModel, new()
     {
-        return new()
+        return new T
         {
             UserId = user.Id,
             Email = user.Email,

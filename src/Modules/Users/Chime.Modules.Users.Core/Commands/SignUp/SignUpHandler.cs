@@ -1,8 +1,10 @@
 using Chime.Modules.Users.Core.Domain.Entities;
+using Chime.Modules.Users.Core.Events;
 using Chime.Modules.Users.Core.Exceptions;
 using Chime.Modules.Users.Core.Repositories;
 using Chime.Shared.Abstractions;
 using Chime.Shared.Abstractions.Commands;
+using Chime.Shared.Abstractions.Messaging;
 using Chime.Shared.Abstractions.Time;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -13,18 +15,24 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
     private readonly IClock _clock;
     private readonly ILogger<SignUpHandler> _logger;
+    private readonly IMessageBroker _messageBroker;
     private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IRoleRepository _roleRepository;
     private readonly IUserRepository _userRepository;
 
-    public SignUpHandler(IUserRepository userRepository, IRoleRepository roleRepository,
-        IPasswordHasher<User> passwordHasher, IClock clock,
+    public SignUpHandler(
+        IUserRepository userRepository,
+        IRoleRepository roleRepository,
+        IPasswordHasher<User> passwordHasher,
+        IClock clock,
+        IMessageBroker messageBroker,
         ILogger<SignUpHandler> logger)
     {
         _userRepository = userRepository;
         _roleRepository = roleRepository;
         _passwordHasher = passwordHasher;
         _clock = clock;
+        _messageBroker = messageBroker;
         _logger = logger;
     }
 
@@ -55,6 +63,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
             State = UserState.Active
         };
         await _userRepository.AddAsync(user);
+        await _messageBroker.PublishAsync(new SignedUp(user.Id, user.Email, user.Role.Name), cancellationToken);
         _logger.LogInformation($"User with ID: '{user.Id}' has signed up.");
     }
 }
