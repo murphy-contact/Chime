@@ -4,7 +4,7 @@
 GET {{url}}
 
 ###
-@email = user2@chime.io
+@email = user12@chime.io
 @adminEmail = admin1@chime.io
 @password = Secret123!
 
