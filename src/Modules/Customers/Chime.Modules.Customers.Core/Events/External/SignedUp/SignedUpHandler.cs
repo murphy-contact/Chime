@@ -28,8 +28,8 @@ internal sealed class SignedUpHandler : IEventHandler<SignedUp>
 
     public async Task HandleAsync(SignedUp @event, CancellationToken cancellationToken = default)
     {
-        await Task.Delay(10000);
-        throw new Exception("ouch");
+        // await Task.Delay(10000);
+        // throw new Exception("ouch");
 
         if (@event.Role is not ValidRole) return;
 
