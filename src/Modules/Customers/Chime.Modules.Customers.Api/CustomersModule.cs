@@ -1,6 +1,8 @@
 using System.Runtime.CompilerServices;
 using Chime.Modules.Customers.Core;
+using Chime.Modules.Customers.Core.Events.External.SignedUp;
 using Chime.Shared.Abstractions.Modules;
+using Chime.Shared.Infrastructure.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,5 +21,6 @@ internal class CustomersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseContracts().Register<SignedUpContract>();
     }
 }

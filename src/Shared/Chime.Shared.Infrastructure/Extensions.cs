@@ -5,6 +5,7 @@ using Chime.Shared.Abstractions.Time;
 using Chime.Shared.Infrastructure.API;
 using Chime.Shared.Infrastructure.Commands;
 using Chime.Shared.Infrastructure.Contexts;
+using Chime.Shared.Infrastructure.Contracts;
 using Chime.Shared.Infrastructure.Dispatchers;
 using Chime.Shared.Infrastructure.Events;
 using Chime.Shared.Infrastructure.Messaging;
@@ -58,6 +59,7 @@ internal static class Extensions
             .AddSingleton<IClock, UtcClock>()
             .AddModuleRequests(assemblies)
             .AddHostedService<DbContextAppInitializer>()
+            .AddContracts()
             .AddControllers()
             .ConfigureApplicationPartManager(manager =>
             {
