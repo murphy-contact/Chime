@@ -17,6 +17,8 @@ internal static class Extensions
         services.AddSingleton<IUserApiClient, UserApiClient>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddPostgres<CustomersDbContext>();
+        services.AddUnitOfWork<CustomersUnitOfWork>();
+
         return services;
     }
 }

@@ -58,7 +58,7 @@ internal static class Extensions
             .AddPostgres()
             .AddSingleton<IClock, UtcClock>()
             .AddModuleRequests(assemblies)
-            .AddHostedService<DbContextAppInitializer>()
+            .AddHostedService<DbContextAppInitializer>() //TODO
             .AddContracts()
             .AddControllers()
             .ConfigureApplicationPartManager(manager =>
@@ -74,6 +74,8 @@ internal static class Extensions
                 foreach (var part in removedParts) manager.ApplicationParts.Remove(part);
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
+
+        services.AddTransactionalDecorators();
 
         return services;
     }

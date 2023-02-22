@@ -1,3 +1,6 @@
+using Chime.Shared.Abstractions.Commands;
+using Chime.Shared.Abstractions.Events;
+using Chime.Shared.Infrastructure.Postgres.Decorators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +12,7 @@ public static class Extensions
     {
         var options = services.GetOptions<PostgresOptions>("postgres");
         services.AddSingleton(options);
-        // services.AddHostedService<DbContextAppInitializer>();
+        // services.AddHostedService<DbContextAppInitializer>();  //TODO
 
         services.AddSingleton(new UnitOfWorkTypeRegistry());
 
@@ -33,6 +36,14 @@ public static class Extensions
         services.AddScoped<T>();
         using var serviceProvider = services.BuildServiceProvider();
         serviceProvider.GetRequiredService<UnitOfWorkTypeRegistry>().Register<T>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddTransactionalDecorators(this IServiceCollection services)
+    {
+        services.TryDecorate(typeof(ICommandHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
+        services.TryDecorate(typeof(IEventHandler<>), typeof(TransactionalEventHandlerDecorator<>));
 
         return services;
     }
