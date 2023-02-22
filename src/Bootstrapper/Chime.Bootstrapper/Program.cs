@@ -1,5 +1,6 @@
 using Chime.Shared.Infrastructure;
 using Chime.Shared.Infrastructure.Contexts;
+using Chime.Shared.Infrastructure.Contracts;
 using Chime.Shared.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 foreach (var module in modules) module.Use(app);
+
+app.ValidateContracts(assemblies);
 
 app.UseContext();
 
